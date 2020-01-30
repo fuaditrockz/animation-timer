@@ -2,14 +2,13 @@ import React from 'react';
 import {
   StatusBar,
 } from 'react-native';
-
-import BackupView from './components/Backup';
+import Countdown from './components/Countdown';
 
 const App: () => React$Node = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <BackupView />
+      <StatusBar backgroundColor="#7ed6df" barStyle="light-content" />
+      <Countdown />
     </>
   );
 };
