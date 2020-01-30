@@ -11,47 +11,10 @@ export default class Countdown extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      hours: "",
-      minutes: "",
-      seconds: "",
-      status: ""
+      seconds: '00',
+      minutes: '00',
+      hours: '00'
     }
-  }
-
-  startCountdown = () => {
-    const dateNow = new Date();
-    const deadline = new Date().setMinutes(dateNow.getMinutes() + 30);
-
-    setInterval(function() {
-      let now = dateNow.getTime();
-      let t = deadline - now;
-      var hours = Math.floor((t%(1000 * 60 * 60 * 24))/(1000 * 60 * 60)); 
-      var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60)); 
-      var seconds = Math.floor((t % (1000 * 60)) / 1000);
-      this.setState({ seconds: 30 })
-      if(t < 0) {
-        clearInterval(x);
-        this.setState({ status: "EXPIRED" })
-      }
-    }, 1000)
-  }
-
-  setHours = (hrs) => {
-    this.setState({
-      hours: hrs
-    })
-  }
-
-  setMinutes = (mins) => {
-    this.setState({
-      minutes: mins
-    })
-  }
-
-  setSeconds(secs) {
-    this.setState({
-      seconds: secs
-    })
   }
 
   render() {
