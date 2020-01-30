@@ -11,18 +11,49 @@ export default class Countdown extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      hours: 4,
-      minutes: 0,
-      seconds: 0
+      hours: "",
+      minutes: "",
+      seconds: "",
+      status: ""
     }
   }
 
   startCountdown = () => {
-    this.clockCall = setInterval(() => {
-     this.decrementClock();
-    }, 1000);
-   }
-  
+    const dateNow = new Date();
+    const deadline = new Date().setMinutes(dateNow.getMinutes() + 30);
+
+    setInterval(function() {
+      let now = dateNow.getTime();
+      let t = deadline - now;
+      var hours = Math.floor((t%(1000 * 60 * 60 * 24))/(1000 * 60 * 60)); 
+      var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60)); 
+      var seconds = Math.floor((t % (1000 * 60)) / 1000);
+      this.setState({ seconds: 30 })
+      if(t < 0) {
+        clearInterval(x);
+        this.setState({ status: "EXPIRED" })
+      }
+    }, 1000)
+  }
+
+  setHours = (hrs) => {
+    this.setState({
+      hours: hrs
+    })
+  }
+
+  setMinutes = (mins) => {
+    this.setState({
+      minutes: mins
+    })
+  }
+
+  setSeconds(secs) {
+    this.setState({
+      seconds: secs
+    })
+  }
+
   render() {
     return (
       <>
@@ -39,7 +70,7 @@ export default class Countdown extends Component {
         <SafeAreaView style={styles.bottomBar}>
           <Button
             title="Start Again"
-            onPress={() => Alert.alert('Simple Button pressed')}
+            onPress={() => this.startCountdown()}
             style={styles.bottomBarButton}
             color="#30336b"
           />
