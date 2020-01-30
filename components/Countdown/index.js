@@ -11,10 +11,42 @@ export default class Countdown extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      seconds: '00',
-      minutes: '00',
-      hours: '00'
+      remainingSecond: 240,
+      time: {},
+      isRunning: false
     }
+    this.startCountdown = this.startCountdown.bind(this);
+  }
+
+  UNSAFE_componentWillMount() {
+    const mins = this.state.remainingSecond / 60;
+    const hrs = mins / 60;
+    this.setState({
+      time: {
+        hours: Math.floor(hrs),
+        minutes: mins,
+        seconds: 60
+      }
+    })
+  }
+
+  startCountdown() {
+    let isRunning = this.state.isRunning;
+    if(isRunning === false) {
+      this.setState({ isRunning: true })
+      this.interval = setInterval(() => this.tick(), 1000);
+    } else {
+      this.setState({ isRunning: false })
+      clearInterval(this.interval);
+    }
+  }
+
+  tick() {
+    this.setState(prevState => ({
+      time: {
+        seconds: prevState.time.seconds - 1
+      }
+    }));
   }
 
   render() {
@@ -25,18 +57,27 @@ export default class Countdown extends Component {
         </SafeAreaView>
         <SafeAreaView style={styles.mainContent}>
           <TimerBlock
-            hours={this.state.hours}
-            minutes={this.state.minutes}
-            seconds={this.state.seconds}
+            hours={this.state.time.hours}
+            minutes={this.state.time.minutes}
+            seconds={this.state.time.seconds}
           />
         </SafeAreaView>
         <SafeAreaView style={styles.bottomBar}>
-          <Button
-            title="Start Again"
-            onPress={() => this.startCountdown()}
-            style={styles.bottomBarButton}
-            color="#30336b"
-          />
+          {this.state.isRunning ? (
+            <Button
+              title="Stop"
+              onPress={this.startCountdown}
+              style={styles.bottomBarButton}
+              color="#30336b"
+            />
+          ) : (
+            <Button
+              title="Start"
+              onPress={this.startCountdown}
+              style={styles.bottomBarButton}
+              color="#30336b"
+            />
+          )}
         </SafeAreaView>
       </>
     )
