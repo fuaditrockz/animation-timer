@@ -5,8 +5,20 @@ import {
   SafeAreaView,
   StyleSheet
 } from 'react-native';
+import TimerBlock from './TimerBlock';
 
 export default class Countdown extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { timer: 30 }
+  }
+
+  startCountdown = () => {
+    this.clockCall = setInterval(() => {
+     this.decrementClock();
+    }, 1000);
+   }
+  
   render() {
     return (
       <>
@@ -14,13 +26,14 @@ export default class Countdown extends Component {
           <Text style={styles.headerText}>Countdown</Text>
         </SafeAreaView>
         <SafeAreaView style={styles.mainContent}>
-          
+          <TimerBlock />
         </SafeAreaView>
         <SafeAreaView style={styles.bottomBar}>
           <Button
             title="Start Again"
             onPress={() => Alert.alert('Simple Button pressed')}
             style={styles.bottomBarButton}
+            color="#30336b"
           />
         </SafeAreaView>
       </>
@@ -42,7 +55,10 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   mainContent: {
-    
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "stretch"
   },
   bottomBar: {
     backgroundColor: "#c7ecee",
@@ -51,9 +67,9 @@ const styles = StyleSheet.create({
     position: 'absolute', 
     bottom: 0, 
     width: "100%",
-    height: 70
+    height: 80
   },
   bottomBarButton: {
-    width: 80
-  }
+    
+  },
 })
