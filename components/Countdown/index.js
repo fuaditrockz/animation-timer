@@ -10,7 +10,11 @@ import TimerBlock from './TimerBlock';
 export default class Countdown extends Component {
   constructor(props) {
     super(props)
-    this.state = { timer: 30 }
+    this.state = {
+      hours: 4,
+      minutes: 0,
+      seconds: 0
+    }
   }
 
   startCountdown = () => {
@@ -26,7 +30,11 @@ export default class Countdown extends Component {
           <Text style={styles.headerText}>Countdown</Text>
         </SafeAreaView>
         <SafeAreaView style={styles.mainContent}>
-          <TimerBlock />
+          <TimerBlock
+            hours={this.state.hours}
+            minutes={this.state.minutes}
+            seconds={this.state.seconds}
+          />
         </SafeAreaView>
         <SafeAreaView style={styles.bottomBar}>
           <Button

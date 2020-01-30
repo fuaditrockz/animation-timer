@@ -13,15 +13,15 @@ export default class TimerBlock extends Component {
            <View style={styles.wrapper}>
 
              <View style={styles.time}>
-               <Text style={styles.text}>00</Text>
+               <Text style={styles.text}>{this.props.hours}</Text>
              </View>
 
              <View style={styles.time}>
-               <Text style={styles.text}>00</Text>
+               <Text style={styles.text}>{this.props.minutes}</Text>
              </View>
 
              <View style={styles.time}>
-               <Text style={styles.text}>00</Text>
+               <Text style={styles.text}>{this.props.seconds}</Text>
              </View>
 
            </View>
