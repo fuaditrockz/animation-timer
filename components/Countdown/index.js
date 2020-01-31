@@ -25,7 +25,7 @@ export default class Countdown extends Component {
       time: {
         hours: Math.floor(hrs),
         minutes: mins,
-        seconds: 60
+        seconds: 10
       }
     })
   }
@@ -34,16 +34,26 @@ export default class Countdown extends Component {
     let isRunning = this.state.isRunning;
     if(isRunning === false) {
       this.setState({ isRunning: true })
-      this.interval = setInterval(() => this.tick(), 1000);
+      /* this.interval = setInterval(() => this.tick(), 1000); */
     } else {
       this.setState({ isRunning: false })
-      clearInterval(this.interval);
+      /* clearInterval(this.interval); */
     }
   }
 
   tick() {
+    if(this.state.time.seconds <= 0) {
+      this.setState(prevState => ({
+        time: {
+          seconds: 60
+        }
+      }));
+    }
+
     this.setState(prevState => ({
       time: {
+        hours: this.state.hours,
+        minutes: this.state.minutes,
         seconds: prevState.time.seconds - 1
       }
     }));
@@ -55,13 +65,14 @@ export default class Countdown extends Component {
         <SafeAreaView style={styles.header}>
           <Text style={styles.headerText}>Countdown</Text>
         </SafeAreaView>
+
         <SafeAreaView style={styles.mainContent}>
           <TimerBlock
-            hours={this.state.time.hours}
-            minutes={this.state.time.minutes}
-            seconds={this.state.time.seconds}
+            remainingSecond={240}
+            isRunning={false}
           />
         </SafeAreaView>
+
         <SafeAreaView style={styles.bottomBar}>
           {this.state.isRunning ? (
             <Button

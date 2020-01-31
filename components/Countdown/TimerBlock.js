@@ -6,6 +6,38 @@ import {
 } from 'react-native';
 
 export default class TimerBlock extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      remainingSecond: this.props.remainingSecond,
+      hours: "",
+      minutes: "",
+      seconds: 0,
+      isRunning: this.props.isRunning
+    }
+  }
+
+  UNSAFE_componentWillMount() {
+    const mins = this.state.remainingSecond / 60;
+    const hrs = mins / 60;
+    this.setState({
+      hours: Math.floor(hrs),
+      minutes: mins
+    })
+  }
+
+  startCounting() {
+    this.startCounting();
+  }
+  
+  secondsCounting() {
+    this.secondInterval = setInterval(() => {
+      this.setState(prevState => ({
+        seconds: prevState.seconds - 1
+      }))
+    }, 1000)
+  }
+
   render() {
     return (
        <>
@@ -13,7 +45,15 @@ export default class TimerBlock extends Component {
            <View style={styles.wrapper}>
 
              <View style={styles.time}>
-               <Text style={styles.text}>{this.props.hours} : {this.props.minutes} : {this.props.seconds}</Text>
+               <Text style={styles.text}>{this.state.hours}</Text>
+             </View>
+
+             <View style={styles.time}>
+               <Text style={styles.text}>{this.state.minutes}</Text>
+             </View>
+
+             <View style={styles.time}>
+               <Text style={styles.text}>{this.state.seconds}</Text>
              </View>
 
            </View>
@@ -25,20 +65,23 @@ export default class TimerBlock extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "blue",
+    /* backgroundColor: "blue", */
     height: 150,
-    paddingHorizontal: 30,
+    paddingHorizontal: 50,
     paddingVertical: 20
   },
   wrapper: {
-    backgroundColor: "yellow",
+    /* backgroundColor: "yellow", */
     height: 100,
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    paddingVertical: 10
   },
   time: {
-    backgroundColor: "white",
+    /* backgroundColor: "white", */
     height: "100%",
+    width: 80,
     textAlign: "center",
     justifyContent: "center"
   },
