@@ -8,7 +8,7 @@ const App: () => React$Node = () => {
   return (
     <>
       <StatusBar backgroundColor="#7ed6df" barStyle="light-content" />
-      <Countdown remainingSecond={32} />
+      <Countdown remainingSecond={10} />
     </>
   );
 };
