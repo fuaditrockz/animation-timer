@@ -16,10 +16,10 @@ export default class Countdown extends Component {
       time: {},
       buttonStatus: false
     }
-    this.handleStartStop = this.handleStartStop.bind(this);    
+    this.handleStartStop = this.handleStartStop.bind(this);
   }
 
-  UNSAFE_componentWillMount() {
+  setupTime() {
     const remainingSecond = this.state.remainingSecond;
     if (remainingSecond <= 60 || remainingSecond <= 0) {
       this.state.time.seconds = remainingSecond;
@@ -29,7 +29,11 @@ export default class Countdown extends Component {
       this.state.time.minutes = Math.floor(remainingSecond / 60);
       this.state.time.seconds = Math.floor(remainingSecond - this.state.time.minutes * 60);
       this.state.time.hours = Math.floor(remainingSecond / 3600);
-    }
+    } 
+  }
+
+  UNSAFE_componentWillMount() {
+    this.setupTime();
   }
 
   handleStartStop() {
@@ -51,29 +55,7 @@ export default class Countdown extends Component {
           }
         }
       } else if (prevState.time.seconds === 0 && prevState.time.minutes === 0) {
-        Alert.alert(
-          'Done',
-          'The countdown was finished.',
-          [{text: 'OK', onPress: () => console.log("Close alert.")}],
-          {cancelable: false},
-        );
-
-        this.setState({
-          remainingSecond: this.props.remainingSecond,
-          buttonStatus: false
-        })
-
-        const remainingSecond = this.state.remainingSecond;
-        if (remainingSecond <= 60 || remainingSecond <= 0) {
-          this.state.time.seconds = remainingSecond;
-          this.state.time.minutes = 0;
-          this.state.time.hours = 0;
-        } else if(this.state.remainingSecond > 60) {
-          this.state.time.minutes = Math.floor(remainingSecond / 60);
-          this.state.time.seconds = Math.floor(remainingSecond - this.state.time.minutes * 60);
-          this.state.time.hours = Math.floor(remainingSecond / 3600);
-        }      
-        
+        this.resetState();
         this.timer = clearInterval(this.timer);
         return null;
       }
@@ -89,22 +71,21 @@ export default class Countdown extends Component {
     }), 1000)
   }
 
-  /* resetAllState() {
+  resetState() {
+    Alert.alert(
+      'Done',
+      'The countdown was finished.',
+      [{text: 'OK', onPress: () => console.log("Close alert.")}],
+      {cancelable: false},
+    );
+
     this.setState({
       remainingSecond: this.props.remainingSecond,
       buttonStatus: false
     })
-    const remainingSecond = this.state.remainingSecond;
-    if (remainingSecond <= 60 || remainingSecond <= 0) {
-      this.state.time.seconds = remainingSecond;
-      this.state.time.minutes = 0;
-      this.state.time.hours = 0;
-    } else if(this.state.remainingSecond > 60) {
-      this.state.time.minutes = Math.floor(remainingSecond / 60);
-      this.state.time.seconds = Math.floor(remainingSecond - this.state.time.minutes * 60);
-      this.state.time.hours = Math.floor(remainingSecond / 3600);
-    }
-  } */
+    
+    this.setupTime();
+  }
   
   render() {
     return (
