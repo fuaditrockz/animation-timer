@@ -52,23 +52,8 @@ export default class Countdown extends Component {
         }
       } else if(prevState.time.seconds === 0 && prevState.time.minutes === 0) {
         this.timer = clearInterval(this.timer);
-        
-        this.setState({
-          buttonStatus: false,
-          remainingSecond: 32
-        })
 
-        const remainingSecond = this.state.remainingSecond;
-        if(remainingSecond <= 60 || remainingSecond <= 0) {
-          this.state.time.seconds = remainingSecond;
-          this.state.time.minutes = 0;
-          this.state.time.hours = 0;
-        } else if(this.state.remainingSecond > 60) {
-          this.state.time.minutes = Math.floor(remainingSecond / 60);
-          this.state.time.seconds = Math.floor(remainingSecond - this.state.time.minutes * 60);
-          this.state.time.hours = Math.floor(remainingSecond / 3600);
-        }
-        return;
+        return null;
       }
 
       return {
