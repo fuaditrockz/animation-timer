@@ -11,54 +11,77 @@ export default class Countdown extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      remainingSecond: 240,
+      remainingSecond: 32,
       time: {},
-      isRunning: false
+      buttonStatus: false
     }
-    this.startCountdown = this.startCountdown.bind(this);
+    this.handleStartStop = this.handleStartStop.bind(this)
   }
 
   UNSAFE_componentWillMount() {
-    const mins = this.state.remainingSecond / 60;
-    const hrs = mins / 60;
-    this.setState({
-      time: {
-        hours: Math.floor(hrs),
-        minutes: mins,
-        seconds: 10
-      }
-    })
-  }
-
-  startCountdown() {
-    let isRunning = this.state.isRunning;
-    if(isRunning === false) {
-      this.setState({ isRunning: true })
-      /* this.interval = setInterval(() => this.tick(), 1000); */
-    } else {
-      this.setState({ isRunning: false })
-      /* clearInterval(this.interval); */
+    const remainingSecond = this.state.remainingSecond;
+    if(remainingSecond <= 60 || remainingSecond <= 0) {
+      this.state.time.seconds = remainingSecond;
+      this.state.time.minutes = 0;
+      this.state.time.hours = 0;
+    } else if(this.state.remainingSecond > 60) {
+      this.state.time.minutes = Math.floor(remainingSecond / 60);
+      this.state.time.seconds = Math.floor(remainingSecond - this.state.time.minutes * 60);
+      this.state.time.hours = Math.floor(remainingSecond / 3600);
     }
   }
 
-  tick() {
-    if(this.state.time.seconds <= 0) {
-      this.setState(prevState => ({
-        time: {
-          seconds: 60
+  handleStartStop() {
+    if (this.timer) {
+      this.timer = clearInterval(this.timer);
+      this.setState({
+        buttonStatus: false
+      })
+      return null;
+    }
+
+    this.timer = setInterval(() => this.setState(prevState => {
+      if(prevState.time.seconds === 0 && prevState.time.minutes >= 1) {
+        /* this.timer = clearInterval(this.timer) */
+        return {
+          time: {
+            seconds: 59,
+            minutes: this.state.time.minutes - 1,
+            hours: this.state.time.hours
+          }
         }
-      }));
-    }
+      } else if(prevState.time.seconds === 0 && prevState.time.minutes === 0) {
+        this.timer = clearInterval(this.timer);
+        
+        this.setState({
+          buttonStatus: false,
+          remainingSecond: 32
+        })
 
-    this.setState(prevState => ({
-      time: {
-        hours: this.state.hours,
-        minutes: this.state.minutes,
-        seconds: prevState.time.seconds - 1
+        const remainingSecond = this.state.remainingSecond;
+        if(remainingSecond <= 60 || remainingSecond <= 0) {
+          this.state.time.seconds = remainingSecond;
+          this.state.time.minutes = 0;
+          this.state.time.hours = 0;
+        } else if(this.state.remainingSecond > 60) {
+          this.state.time.minutes = Math.floor(remainingSecond / 60);
+          this.state.time.seconds = Math.floor(remainingSecond - this.state.time.minutes * 60);
+          this.state.time.hours = Math.floor(remainingSecond / 3600);
+        }
+        return;
       }
-    }));
-  }
 
+      return {
+        buttonStatus: true,
+        time: {
+          seconds: prevState.time.seconds - 1,
+          minutes: this.state.time.minutes,
+          hours: this.state.time.hours,
+        }
+      }
+    }), 1000)
+  }
+  
   render() {
     return (
       <>
@@ -68,27 +91,29 @@ export default class Countdown extends Component {
 
         <SafeAreaView style={styles.mainContent}>
           <TimerBlock
-            remainingSecond={240}
-            isRunning={false}
+            hours={this.state.time.hours}
+            minutes={this.state.time.minutes}
+            seconds={this.state.time.seconds}
           />
         </SafeAreaView>
 
         <SafeAreaView style={styles.bottomBar}>
-          {this.state.isRunning ? (
+          {this.state.buttonStatus === false 
+            ? 
             <Button
-              title="Stop"
-              onPress={this.startCountdown}
+            title="Start"
+            onPress={this.handleStartStop}
+            style={styles.bottomBarButton}
+            color="#30336b"
+          />
+            : 
+          <Button
+              title="Pause"
+              onPress={this.handleStartStop}
               style={styles.bottomBarButton}
               color="#30336b"
             />
-          ) : (
-            <Button
-              title="Start"
-              onPress={this.startCountdown}
-              style={styles.bottomBarButton}
-              color="#30336b"
-            />
-          )}
+          }
         </SafeAreaView>
       </>
     )

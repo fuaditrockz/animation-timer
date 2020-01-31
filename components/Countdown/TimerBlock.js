@@ -6,38 +6,6 @@ import {
 } from 'react-native';
 
 export default class TimerBlock extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      remainingSecond: this.props.remainingSecond,
-      hours: "",
-      minutes: "",
-      seconds: 0,
-      isRunning: this.props.isRunning
-    }
-  }
-
-  UNSAFE_componentWillMount() {
-    const mins = this.state.remainingSecond / 60;
-    const hrs = mins / 60;
-    this.setState({
-      hours: Math.floor(hrs),
-      minutes: mins
-    })
-  }
-
-  startCounting() {
-    this.startCounting();
-  }
-  
-  secondsCounting() {
-    this.secondInterval = setInterval(() => {
-      this.setState(prevState => ({
-        seconds: prevState.seconds - 1
-      }))
-    }, 1000)
-  }
-
   render() {
     return (
        <>
@@ -45,15 +13,15 @@ export default class TimerBlock extends Component {
            <View style={styles.wrapper}>
 
              <View style={styles.time}>
-               <Text style={styles.text}>{this.state.hours}</Text>
+               <Text style={styles.text}>{this.props.hours}</Text>
              </View>
 
              <View style={styles.time}>
-               <Text style={styles.text}>{this.state.minutes}</Text>
+               <Text style={styles.text}>{this.props.minutes}</Text>
              </View>
 
              <View style={styles.time}>
-               <Text style={styles.text}>{this.state.seconds}</Text>
+               <Text style={styles.text}>{this.props.seconds}</Text>
              </View>
 
            </View>
