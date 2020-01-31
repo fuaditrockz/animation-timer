@@ -4,9 +4,10 @@ import {
   Text,
   SafeAreaView,
   StyleSheet,
-  Alert
+  Alert, View,
 } from 'react-native';
 import TimerBlock from './TimerBlock';
+import SecondsBlock from './widgets/SecondsBlock';
 
 export default class Countdown extends Component {
   constructor(props) {
@@ -88,11 +89,18 @@ export default class Countdown extends Component {
         </SafeAreaView>
 
         <SafeAreaView style={styles.mainContent}>
-          <TimerBlock
+          <View style={styles.blockContainer}>
+            <SecondsBlock seconds={this.state.time.seconds} />
+            <Text style={styles.colonDivider} >:</Text>
+            <SecondsBlock seconds={this.state.time.seconds} />
+            <Text style={styles.colonDivider} >:</Text>
+            <SecondsBlock seconds={this.state.time.seconds} />
+          </View>
+          {/* <TimerBlock
             hours={this.state.time.hours}
             minutes={this.state.time.minutes}
             seconds={this.state.time.seconds}
-          />
+          /> */}
         </SafeAreaView>
 
         <SafeAreaView style={styles.bottomBar}>
@@ -102,14 +110,14 @@ export default class Countdown extends Component {
             title="Start"
             onPress={this.handleStartStop}
             style={styles.bottomBarButton}
-            color="#30336b"
+            color="#f6b93b"
           />
             : 
           <Button
               title="Pause"
               onPress={this.handleStartStop}
               style={styles.bottomBarButton}
-              color="#30336b"
+              color="#f6b93b"
             />
           }
         </SafeAreaView>
@@ -122,7 +130,7 @@ const styles = StyleSheet.create({
   header: {
     alignItems: "stretch",
     justifyContent: "center",
-    backgroundColor: "#22a6b3",
+    backgroundColor: "#e58e26",
     height: 60
   },
   headerText: {
@@ -135,10 +143,23 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "stretch"
+    alignItems: "stretch",
+    /* backgroundColor: "red" */
+  },
+  colonDivider: {
+    fontSize: 50,
+    fontWeight: "bold",
+    color: "#fa983a"
+  },
+  blockContainer: {
+    backgroundColor: "blue",
+    height: 300,
+    paddingHorizontal: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   },
   bottomBar: {
-    backgroundColor: "#c7ecee",
+    /* backgroundColor: "#c7ecee", */
     justifyContent: "center", 
     paddingHorizontal: 10,
     position: 'absolute', 

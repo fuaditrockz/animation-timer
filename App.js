@@ -7,7 +7,7 @@ import Countdown from './components/Countdown';
 const App: () => React$Node = () => {
   return (
     <>
-      <StatusBar backgroundColor="#7ed6df" barStyle="light-content" />
+      <StatusBar backgroundColor="#fad390" barStyle="light-content" />
       <Countdown remainingSecond={10} />
     </>
   );

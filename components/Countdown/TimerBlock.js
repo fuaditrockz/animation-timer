@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  Animated,
 } from 'react-native';
 
 function timeFormat(string, pad, length) {
@@ -10,10 +11,37 @@ function timeFormat(string, pad, length) {
 }
 
 export default class TimerBlock extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      fadeValue: new Animated.Value(0)
+    }
+  }
+
+  _start = () => {
+    Animated.timing(this.state.fadeValue, {
+      toValue: 1,
+      duration: 3000
+    }).start();
+  };
+
+  componentDidMount() {
+    this._start()
+  }
+  
   render() {
     return (
        <>
          <View style={styles.container}>
+           <View>
+              <Animated.Text
+                style={{
+                  opacity: this.state.fadeValue,
+                }}
+              >
+                Hello World
+              </Animated.Text>
+           </View>
            <View style={styles.wrapper}>
 
              <View style={styles.time}>
