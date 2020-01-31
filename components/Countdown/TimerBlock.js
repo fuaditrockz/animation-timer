@@ -5,6 +5,10 @@ import {
   StyleSheet
 } from 'react-native';
 
+function timeFormat(string, pad, length) {
+  return (new Array(length + 1).join(pad) + string).slice(-length);
+}
+
 export default class TimerBlock extends Component {
   render() {
     return (
@@ -13,15 +17,15 @@ export default class TimerBlock extends Component {
            <View style={styles.wrapper}>
 
              <View style={styles.time}>
-               <Text style={styles.text}>{this.props.hours}</Text>
+               <Text style={styles.text}>{timeFormat(this.props.hours,'0', 2)}</Text>
              </View>
 
              <View style={styles.time}>
-               <Text style={styles.text}>{this.props.minutes}</Text>
+               <Text style={styles.text}>{timeFormat(this.props.minutes,'0', 2)}</Text>
              </View>
 
              <View style={styles.time}>
-               <Text style={styles.text}>{this.props.seconds}</Text>
+               <Text style={styles.text}>{timeFormat(this.props.seconds,'0', 2)}</Text>
              </View>
 
            </View>

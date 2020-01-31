@@ -55,9 +55,18 @@ export default class Countdown extends Component {
           }
         }
       } else if (prevState.time.seconds === 0 && prevState.time.minutes === 0) {
-        this.resetState();
+        /* this.resetState(); */
+        Alert.alert(
+          'Done',
+          'The countdown was finished.',
+          [{text: 'OK', onPress: this.setupTime()}],
+          {cancelable: false},
+        );
         this.timer = clearInterval(this.timer);
-        return null;
+        return {
+          remainingSecond: this.props.remainingSecond,
+          buttonStatus: false
+        };
       }
 
       return {
@@ -69,22 +78,6 @@ export default class Countdown extends Component {
         }
       }
     }), 1000)
-  }
-
-  resetState() {
-    Alert.alert(
-      'Done',
-      'The countdown was finished.',
-      [{text: 'OK', onPress: () => console.log("Close alert.")}],
-      {cancelable: false},
-    );
-
-    this.setState({
-      remainingSecond: this.props.remainingSecond,
-      buttonStatus: false
-    })
-    
-    this.setupTime();
   }
   
   render() {
