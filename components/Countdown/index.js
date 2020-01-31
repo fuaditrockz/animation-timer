@@ -3,7 +3,8 @@ import {
   Button,
   Text,
   SafeAreaView,
-  StyleSheet
+  StyleSheet,
+  Alert
 } from 'react-native';
 import TimerBlock from './TimerBlock';
 
@@ -11,7 +12,7 @@ export default class Countdown extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      remainingSecond: 32,
+      remainingSecond: this.props.remainingSecond,
       time: {},
       buttonStatus: false
     }
@@ -20,7 +21,7 @@ export default class Countdown extends Component {
 
   UNSAFE_componentWillMount() {
     const remainingSecond = this.state.remainingSecond;
-    if(remainingSecond <= 60 || remainingSecond <= 0) {
+    if (remainingSecond <= 60 || remainingSecond <= 0) {
       this.state.time.seconds = remainingSecond;
       this.state.time.minutes = 0;
       this.state.time.hours = 0;
@@ -41,8 +42,7 @@ export default class Countdown extends Component {
     }
 
     this.timer = setInterval(() => this.setState(prevState => {
-      if(prevState.time.seconds === 0 && prevState.time.minutes >= 1) {
-        /* this.timer = clearInterval(this.timer) */
+      if (prevState.time.seconds === 0 && prevState.time.minutes >= 1) {
         return {
           time: {
             seconds: 59,
@@ -50,9 +50,14 @@ export default class Countdown extends Component {
             hours: this.state.time.hours
           }
         }
-      } else if(prevState.time.seconds === 0 && prevState.time.minutes === 0) {
+      } else if (prevState.time.seconds === 0 && prevState.time.minutes === 0) {
+        Alert.alert(
+          'Done',
+          'The countdown was finished.',
+          [{text: 'OK', onPress: () => console.log('OK Pressed')}],
+          {cancelable: false},
+        );        
         this.timer = clearInterval(this.timer);
-
         return null;
       }
 
@@ -65,6 +70,23 @@ export default class Countdown extends Component {
         }
       }
     }), 1000)
+  }
+
+  resetAllState() {
+    this.setState({
+      remainingSecond: this.props.remainingSecond,
+      buttonStatus: false
+    })
+    const remainingSecond = this.state.remainingSecond;
+    if (remainingSecond <= 60 || remainingSecond <= 0) {
+      this.state.time.seconds = remainingSecond;
+      this.state.time.minutes = 0;
+      this.state.time.hours = 0;
+    } else if(this.state.remainingSecond > 60) {
+      this.state.time.minutes = Math.floor(remainingSecond / 60);
+      this.state.time.seconds = Math.floor(remainingSecond - this.state.time.minutes * 60);
+      this.state.time.hours = Math.floor(remainingSecond / 3600);
+    }
   }
   
   render() {
