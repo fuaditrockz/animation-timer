@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   header: {
     alignItems: "stretch",
     justifyContent: "center",
-    backgroundColor: "#e58e26",
+    backgroundColor: "#82ccdd",
     height: 200
   },
   headerText: {
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
   colonDivider: {
     fontSize: 50,
     fontWeight: "bold",
-    color: "#fa983a"
+    color: "white"
   },
   blockContainer: {
     /* backgroundColor: "blue", */
@@ -161,10 +161,13 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   timeWrapper: {
-    /* backgroundColor: "pink", */
+    backgroundColor: "#1e3799",
     width: "100%",
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    justifyContent: 'space-between',
+    borderRadius: 10,
     position: 'absolute',
     top: -40
 
@@ -180,7 +183,7 @@ const styles = StyleSheet.create({
   bottomBarButton: {
     height: "100%",
     width: "100%",
-    backgroundColor: "#fa983a",
+    backgroundColor: "#1e3799",
     justifyContent: "center"
   },
   bottomBarButtonActive: {

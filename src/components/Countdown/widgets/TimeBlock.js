@@ -30,7 +30,7 @@ export default class TimeBlock extends Component {
   render() {
     return (
       <Animated.View style={{
-        backgroundColor: "#fa983a",
+        backgroundColor: "#4a69bd",
         width: 80,
         height: 80,
         borderRadius: 10,
