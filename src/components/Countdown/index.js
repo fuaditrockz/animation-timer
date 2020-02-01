@@ -15,25 +15,38 @@ export default class Countdown extends Component {
       remainingSecond: this.props.remainingSecond,
       time: {},
       buttonStatus: false,
-      opacityValue: new Animated.Value(1)
+      opacityValueSecond: new Animated.Value(1),
+      opacityValueMinute: new Animated.Value(1)
     }
     this.handleStartStop = this.handleStartStop.bind(this);
-    this.slideUp = new Animated.ValueXY({ x: 0, y: 0 })
+    this.slideUpSecond = new Animated.ValueXY({ x: 0, y: 0 })
+    this.slideUpMinute = new Animated.ValueXY({ x: 0, y: 0 })
   }
 
-  _moveTest = () => {
-    Animated.timing(this.state.opacityValue, {
+  _secondAnimation = () => {
+    Animated.timing(this.state.opacityValueSecond, {
       toValue: 0,
     }).start();
 
-    Animated.spring(this.slideUp, {
+    Animated.spring(this.slideUpSecond, {
+      toValue: {x: 0, y: -40},
+      duration: 1000,
+    }).start();
+  }
+
+  _minuteAnimation = () => {
+    Animated.timing(this.state.opacityValueMinute, {
+      toValue: 0,
+    }).start();
+
+    Animated.spring(this.slideUpMinute, {
       toValue: {x: 0, y: -40},
       duration: 1000,
     }).start();
   }
 
   setupTime() {
-    const remainingSecond = this.state.remainingSecond;
+    const remainingSecond = this.props.remainingSecond;
     if (remainingSecond <= 60 || remainingSecond <= 0) {
       this.state.time.seconds = remainingSecond;
       this.state.time.minutes = 0;
@@ -59,13 +72,15 @@ export default class Countdown extends Component {
     }
     
     this.timer = setInterval(() => this.setState(prevState => {
-      this.slideUp = new Animated.ValueXY({ x: 0, y: 0 })
-      this.state.opacityValue = new Animated.Value(1)
+      this.slideUpSecond = new Animated.ValueXY({ x: 0, y: 0 })
+      this.state.opacityValueSecond = new Animated.Value(1)
 
-      if (prevState.time.seconds === 0 && prevState.time.minutes >= 1) {
+      if (prevState.time.seconds <= 1 && prevState.time.minutes >= 1) {
+        this._minuteAnimation();
+        this._secondAnimation();
         return {
           time: {
-            seconds: 59,
+            seconds: 60,
             minutes: this.state.time.minutes - 1,
             hours: this.state.time.hours
           }
@@ -81,13 +96,16 @@ export default class Countdown extends Component {
         this.timer = clearInterval(this.timer);
 
         return {
-          remainingSecond: this.props.remainingSecond,
-          buttonStatus: false,
-          opacityValue: new Animated.Value(1)
+          time: {
+            seconds: this.state.time.seconds + 1,
+            minutes: this.state.time.minutes,
+            hours: this.state.time.hours
+          },
+          buttonStatus: false
         };
       }
 
-      this._moveTest();
+      this._secondAnimation();
 
       return {
         buttonStatus: true,
@@ -121,7 +139,20 @@ export default class Countdown extends Component {
 
               <Text style={styles.colonDivider} >:</Text>
 
-              <TimeBlock time={this.state.time.minutes} />
+              <View>
+                <TimeBlock 
+                  position="absolute"
+                  time={this.state.time.minutes <= 0 ? 0 : this.state.time.minutes - 1}
+                />
+                <Animated.View
+                  useNativeDriver={true}
+                  style={[{
+                    opacity: this.state.opacityValueMinute
+                  }, this.slideUpMinute.getLayout()]}
+                >
+                  <TimeBlock time={this.state.time.minutes} />
+                </Animated.View>
+              </View>
 
               <Text style={styles.colonDivider} >:</Text>
 
@@ -133,8 +164,8 @@ export default class Countdown extends Component {
                 <Animated.View
                   useNativeDriver={true}
                   style={[{
-                    opacity: this.state.opacityValue
-                  }, this.slideUp.getLayout()]}
+                    opacity: this.state.opacityValueSecond
+                  }, this.slideUpSecond.getLayout()]}
                 >
                   <TimeBlock time={this.state.time.seconds} />
                 </Animated.View>
