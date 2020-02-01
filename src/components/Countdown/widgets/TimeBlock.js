@@ -16,6 +16,7 @@ export default class TimeBlock extends Component {
         height: 80,
         borderRadius: 10,
         justifyContent: 'center',
+        position: this.props.position
       }}>
         <Text style={styles.text}>{timeFormat(this.props.time,'0', 2)}</Text>
       </View>
@@ -24,9 +25,6 @@ export default class TimeBlock extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'column'
-  },
   text: {
     fontFamily: 'Digital7',
     fontSize: 50, 

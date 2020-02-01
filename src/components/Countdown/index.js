@@ -15,14 +15,14 @@ export default class Countdown extends Component {
       remainingSecond: this.props.remainingSecond,
       time: {},
       buttonStatus: false,
+      opacityValue: new Animated.Value(1)
     }
     this.handleStartStop = this.handleStartStop.bind(this);
     this.slideUp = new Animated.ValueXY({ x: 0, y: 0 })
-    this.opacity = new Animated.Value(1)
   }
 
   _moveTest = () => {
-    Animated.timing(this.opacity, {
+    Animated.timing(this.state.opacityValue, {
       toValue: 0,
     }).start();
 
@@ -33,7 +33,6 @@ export default class Countdown extends Component {
   }
 
   setupTime() {
-    this.opacity = new Animated.Value(1)
     const remainingSecond = this.state.remainingSecond;
     if (remainingSecond <= 60 || remainingSecond <= 0) {
       this.state.time.seconds = remainingSecond;
@@ -61,7 +60,8 @@ export default class Countdown extends Component {
     
     this.timer = setInterval(() => this.setState(prevState => {
       this.slideUp = new Animated.ValueXY({ x: 0, y: 0 })
-      this.opacity = new Animated.Value(1)
+      this.state.opacityValue = new Animated.Value(1)
+
       if (prevState.time.seconds === 0 && prevState.time.minutes >= 1) {
         return {
           time: {
@@ -70,17 +70,20 @@ export default class Countdown extends Component {
             hours: this.state.time.hours
           }
         }
-      } else if (prevState.time.seconds === 0 && prevState.time.minutes === 0) {
+      } else if (prevState.time.seconds <= 1 && prevState.time.minutes === 0) {
         Alert.alert(
           'Done',
           'The countdown was finished.',
           [{text: 'OK', onPress: this.setupTime()}],
           {cancelable: false},
         );
+
         this.timer = clearInterval(this.timer);
+
         return {
           remainingSecond: this.props.remainingSecond,
-          buttonStatus: false
+          buttonStatus: false,
+          opacityValue: new Animated.Value(1)
         };
       }
 
@@ -92,7 +95,7 @@ export default class Countdown extends Component {
           seconds: prevState.time.seconds - 1,
           minutes: this.state.time.minutes,
           hours: this.state.time.hours,
-        },
+        } 
       }
     }), 1000)
   }
@@ -115,17 +118,27 @@ export default class Countdown extends Component {
           <View style={styles.blockContainer}>
             <View style={styles.timeWrapper}>
               <TimeBlock time={this.state.time.hours} />
+
               <Text style={styles.colonDivider} >:</Text>
+
               <TimeBlock time={this.state.time.minutes} />
+
               <Text style={styles.colonDivider} >:</Text>
-              <Animated.View
-                useNativeDriver={true}
-                style={[{
-                  opacity: this.opacity
-                }, this.slideUp.getLayout()]}
-              >
-                <TimeBlock time={this.state.time.seconds} />
-              </Animated.View>
+
+              <View>
+                <TimeBlock 
+                  position="absolute"
+                  time={this.state.time.seconds <= 0 ? 0 : this.state.time.seconds - 1}
+                />
+                <Animated.View
+                  useNativeDriver={true}
+                  style={[{
+                    opacity: this.state.opacityValue
+                  }, this.slideUp.getLayout()]}
+                >
+                  <TimeBlock time={this.state.time.seconds} />
+                </Animated.View>
+              </View>
             </View>
           </View>
           {/* <TimerBlock
