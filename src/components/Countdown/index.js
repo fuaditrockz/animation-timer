@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import {
-  Button,
   Text,
   SafeAreaView,
   StyleSheet,
-  Alert, View, TouchableOpacity, Image
+  Alert, View, TouchableOpacity, Image, Animated
 } from 'react-native';
 import TimerBlock from './TimerBlock';
 import TimeBlock from './widgets/TimeBlock';
@@ -18,6 +17,13 @@ export default class Countdown extends Component {
       buttonStatus: false
     }
     this.handleStartStop = this.handleStartStop.bind(this);
+    this.testAnimation = new Animated.ValueXY({ x: 10, y: 450 })
+  }
+
+  _moveTest = () => {
+    Animated.spring(this.testAnimation, {
+      toValue: {x: 250, y: 10},
+    }).start();
   }
 
   setupTime() {
@@ -38,6 +44,8 @@ export default class Countdown extends Component {
   }
 
   handleStartStop() {
+    this._moveTest();
+
     if (this.timer) {
       this.timer = clearInterval(this.timer);
       this.setState({
@@ -111,6 +119,18 @@ export default class Countdown extends Component {
           /> */}
         </SafeAreaView>
 
+        <SafeAreaView style={{ backgroundColor: "white", height: 200 }}>
+          <Animated.View
+            style={[{
+              height: 40,
+              width: 40,
+              backgroundColor: "black"
+            }, this.testAnimation.getLayout()]}
+          >
+
+          </Animated.View>
+        </SafeAreaView>
+
         <SafeAreaView style={styles.bottomBar}>
           {
             this.state.buttonStatus === false
@@ -154,7 +174,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     alignItems: "stretch",
-    /* backgroundColor: "red" */
+    backgroundColor: "#4a4a4a"
   },
   colonDivider: {
     fontSize: 50,
@@ -200,7 +220,7 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   buttonText: {
-    fontSize: 30,
+    fontSize: 20,
     textAlign: "center",
     fontFamily: 'Morton-Black',
     color: "white",

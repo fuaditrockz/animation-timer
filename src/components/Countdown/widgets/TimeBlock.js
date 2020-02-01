@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  Animated,
   Text, View
 } from 'react-native';
 
@@ -9,27 +8,9 @@ function timeFormat(string, pad, length) {
   return (new Array(length + 1).join(pad) + string).slice(-length);
 }
 export default class TimeBlock extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      positionValue: new Animated.Value(0),
-    }
-  }
-
-  _start = () => {
-    Animated.timing(this.state.positionValue, {
-      totalValue: 1,
-      duration: 1000
-    }).start();
-  }
-
-  componentDidMount() {
-    this._start()
-  }
-
   render() {
     return (
-      <Animated.View style={{
+      <View style={{
         backgroundColor: "#4a69bd",
         width: 80,
         height: 80,
@@ -37,7 +18,7 @@ export default class TimeBlock extends Component {
         justifyContent: 'center',
       }}>
         <Text style={styles.text}>{timeFormat(this.props.time,'0', 2)}</Text>
-      </Animated.View>
+      </View>
     )
   }
 }
