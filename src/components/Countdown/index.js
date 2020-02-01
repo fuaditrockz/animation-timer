@@ -89,11 +89,13 @@ export default class Countdown extends Component {
 
         <SafeAreaView style={styles.mainContent}>
           <View style={styles.blockContainer}>
-            <TimeBlock time={this.state.time.hours} />
-            <Text style={styles.colonDivider} >:</Text>
-            <TimeBlock time={this.state.time.minutes} />
-            <Text style={styles.colonDivider} >:</Text>
-            <TimeBlock time={this.state.time.seconds} />
+            <View style={styles.timeWrapper}>
+              <TimeBlock time={this.state.time.hours} />
+              <Text style={styles.colonDivider} >:</Text>
+              <TimeBlock time={this.state.time.minutes} />
+              <Text style={styles.colonDivider} >:</Text>
+              <TimeBlock time={this.state.time.seconds} />
+            </View>
           </View>
           {/* <TimerBlock
             hours={this.state.time.hours}
@@ -122,22 +124,6 @@ export default class Countdown extends Component {
               <Text style={styles.buttonText}>PAUSE</Text>
             </TouchableOpacity>
           }
-          {/* {this.state.buttonStatus === false 
-            ? 
-            <Button
-            title="Start"
-            onPress={this.handleStartStop}
-            style={styles.bottomBarButton}
-            color="#f6b93b"
-          />
-            : 
-          <Button
-              title="Pause"
-              onPress={this.handleStartStop}
-              style={styles.bottomBarButton}
-              color="#f6b93b"
-            />
-          } */}
         </SafeAreaView>
       </>
     )
@@ -149,7 +135,7 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     justifyContent: "center",
     backgroundColor: "#e58e26",
-    height: 60
+    height: 200
   },
   headerText: {
     textAlign: "center",
@@ -160,7 +146,6 @@ const styles = StyleSheet.create({
   mainContent: {
     flex: 1,
     flexDirection: "column",
-    justifyContent: "center",
     alignItems: "stretch",
     /* backgroundColor: "red" */
   },
@@ -173,8 +158,16 @@ const styles = StyleSheet.create({
     /* backgroundColor: "blue", */
     height: 300,
     paddingHorizontal: 20,
+    alignItems: 'center'
+  },
+  timeWrapper: {
+    /* backgroundColor: "pink", */
+    width: "100%",
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    position: 'absolute',
+    top: -40
+
   },
   bottomBar: {
     /* backgroundColor: "#c7ecee", */
