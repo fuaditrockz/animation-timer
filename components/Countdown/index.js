@@ -7,7 +7,7 @@ import {
   Alert, View,
 } from 'react-native';
 import TimerBlock from './TimerBlock';
-import SecondsBlock from './widgets/SecondsBlock';
+import TimeBlock from './widgets/TimeBlock';
 
 export default class Countdown extends Component {
   constructor(props) {
@@ -56,7 +56,6 @@ export default class Countdown extends Component {
           }
         }
       } else if (prevState.time.seconds === 0 && prevState.time.minutes === 0) {
-        /* this.resetState(); */
         Alert.alert(
           'Done',
           'The countdown was finished.',
@@ -90,11 +89,11 @@ export default class Countdown extends Component {
 
         <SafeAreaView style={styles.mainContent}>
           <View style={styles.blockContainer}>
-            <SecondsBlock seconds={this.state.time.seconds} />
+            <TimeBlock time={this.state.time.hours} />
             <Text style={styles.colonDivider} >:</Text>
-            <SecondsBlock seconds={this.state.time.seconds} />
+            <TimeBlock time={this.state.time.minutes} />
             <Text style={styles.colonDivider} >:</Text>
-            <SecondsBlock seconds={this.state.time.seconds} />
+            <TimeBlock time={this.state.time.seconds} />
           </View>
           {/* <TimerBlock
             hours={this.state.time.hours}
