@@ -4,7 +4,7 @@ import {
   Text,
   SafeAreaView,
   StyleSheet,
-  Alert, View,
+  Alert, View, TouchableOpacity
 } from 'react-native';
 import TimerBlock from './TimerBlock';
 import TimeBlock from './widgets/TimeBlock';
@@ -103,7 +103,26 @@ export default class Countdown extends Component {
         </SafeAreaView>
 
         <SafeAreaView style={styles.bottomBar}>
-          {this.state.buttonStatus === false 
+          {
+            this.state.buttonStatus === false
+            ?
+            <TouchableOpacity
+              onPress={this.handleStartStop}
+              activeOpacity={0.9}
+              style={styles.bottomBarButton}
+            >
+              <Text style={styles.buttonText}>START</Text>
+            </TouchableOpacity>
+            :
+            <TouchableOpacity
+              onPress={this.handleStartStop}
+              activeOpacity={0.9}
+              style={styles.bottomBarButtonActive}
+            >
+              <Text style={styles.buttonText}>PAUSE</Text>
+            </TouchableOpacity>
+          }
+          {/* {this.state.buttonStatus === false 
             ? 
             <Button
             title="Start"
@@ -118,7 +137,7 @@ export default class Countdown extends Component {
               style={styles.bottomBarButton}
               color="#f6b93b"
             />
-          }
+          } */}
         </SafeAreaView>
       </>
     )
@@ -160,13 +179,28 @@ const styles = StyleSheet.create({
   bottomBar: {
     /* backgroundColor: "#c7ecee", */
     justifyContent: "center", 
-    paddingHorizontal: 10,
     position: 'absolute', 
     bottom: 0, 
     width: "100%",
-    height: 80
+    height: 70
   },
   bottomBarButton: {
-    
+    height: "100%",
+    width: "100%",
+    backgroundColor: "#fa983a",
+    justifyContent: "center"
   },
+  bottomBarButtonActive: {
+    height: "100%",
+    width: "100%",
+    backgroundColor: "#38ada9",
+    justifyContent: "center"
+  },
+  buttonText: {
+    fontSize: 30,
+    textAlign: "center",
+    fontFamily: 'Morton-Black',
+    color: "white",
+    letterSpacing: 5
+  }
 })
