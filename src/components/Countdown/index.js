@@ -4,7 +4,7 @@ import {
   Text,
   SafeAreaView,
   StyleSheet,
-  Alert, View, TouchableOpacity
+  Alert, View, TouchableOpacity, Image
 } from 'react-native';
 import TimerBlock from './TimerBlock';
 import TimeBlock from './widgets/TimeBlock';
@@ -84,7 +84,14 @@ export default class Countdown extends Component {
     return (
       <>
         <SafeAreaView style={styles.header}>
-          <Text style={styles.headerText}>Countdown</Text>
+          <Image 
+            source={require('../../assets/images/illustration.png')} 
+            style={{
+              width: "100%",
+              height: 290
+            }}
+          />
+          {/* <Text style={styles.headerText}>Countdown</Text> */}
         </SafeAreaView>
 
         <SafeAreaView style={styles.mainContent}>
@@ -135,7 +142,7 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     justifyContent: "center",
     backgroundColor: "#82ccdd",
-    height: 200
+    height: 290
   },
   headerText: {
     textAlign: "center",
