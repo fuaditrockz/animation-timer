@@ -14,19 +14,26 @@ export default class Countdown extends Component {
     this.state = {
       remainingSecond: this.props.remainingSecond,
       time: {},
-      buttonStatus: false
+      buttonStatus: false,
     }
     this.handleStartStop = this.handleStartStop.bind(this);
-    this.testAnimation = new Animated.ValueXY({ x: 10, y: 450 })
+    this.slideUp = new Animated.ValueXY({ x: 0, y: 0 })
+    this.opacity = new Animated.Value(1)
   }
 
   _moveTest = () => {
-    Animated.spring(this.testAnimation, {
-      toValue: {x: 250, y: 10},
+    Animated.timing(this.opacity, {
+      toValue: 0,
+    }).start();
+
+    Animated.spring(this.slideUp, {
+      toValue: {x: 0, y: -40},
+      duration: 1000,
     }).start();
   }
 
   setupTime() {
+    this.opacity = new Animated.Value(1)
     const remainingSecond = this.state.remainingSecond;
     if (remainingSecond <= 60 || remainingSecond <= 0) {
       this.state.time.seconds = remainingSecond;
@@ -36,7 +43,7 @@ export default class Countdown extends Component {
       this.state.time.minutes = Math.floor(remainingSecond / 60);
       this.state.time.seconds = Math.floor(remainingSecond - this.state.time.minutes * 60);
       this.state.time.hours = Math.floor(remainingSecond / 3600);
-    } 
+    }
   }
 
   UNSAFE_componentWillMount() {
@@ -44,8 +51,6 @@ export default class Countdown extends Component {
   }
 
   handleStartStop() {
-    this._moveTest();
-
     if (this.timer) {
       this.timer = clearInterval(this.timer);
       this.setState({
@@ -53,8 +58,10 @@ export default class Countdown extends Component {
       })
       return null;
     }
-
+    
     this.timer = setInterval(() => this.setState(prevState => {
+      this.slideUp = new Animated.ValueXY({ x: 0, y: 0 })
+      this.opacity = new Animated.Value(1)
       if (prevState.time.seconds === 0 && prevState.time.minutes >= 1) {
         return {
           time: {
@@ -77,13 +84,15 @@ export default class Countdown extends Component {
         };
       }
 
+      this._moveTest();
+
       return {
         buttonStatus: true,
         time: {
           seconds: prevState.time.seconds - 1,
           minutes: this.state.time.minutes,
           hours: this.state.time.hours,
-        }
+        },
       }
     }), 1000)
   }
@@ -109,7 +118,14 @@ export default class Countdown extends Component {
               <Text style={styles.colonDivider} >:</Text>
               <TimeBlock time={this.state.time.minutes} />
               <Text style={styles.colonDivider} >:</Text>
-              <TimeBlock time={this.state.time.seconds} />
+              <Animated.View
+                useNativeDriver={true}
+                style={[{
+                  opacity: this.opacity
+                }, this.slideUp.getLayout()]}
+              >
+                <TimeBlock time={this.state.time.seconds} />
+              </Animated.View>
             </View>
           </View>
           {/* <TimerBlock
@@ -117,18 +133,6 @@ export default class Countdown extends Component {
             minutes={this.state.time.minutes}
             seconds={this.state.time.seconds}
           /> */}
-        </SafeAreaView>
-
-        <SafeAreaView style={{ backgroundColor: "white", height: 200 }}>
-          <Animated.View
-            style={[{
-              height: 40,
-              width: 40,
-              backgroundColor: "black"
-            }, this.testAnimation.getLayout()]}
-          >
-
-          </Animated.View>
         </SafeAreaView>
 
         <SafeAreaView style={styles.bottomBar}>
