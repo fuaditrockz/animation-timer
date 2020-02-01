@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     color: "#fa983a"
   },
   blockContainer: {
-    backgroundColor: "blue",
+    /* backgroundColor: "blue", */
     height: 300,
     paddingHorizontal: 20,
     flexDirection: 'row',

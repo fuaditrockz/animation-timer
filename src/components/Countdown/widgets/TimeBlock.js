@@ -29,23 +29,15 @@ export default class TimeBlock extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Animated.View style={{
-          backgroundColor: "#fa983a",
-          width: 80,
-          height: 80,
-          borderRadius: 10,
-          justifyContent: 'center',
-        }}>
-          <Text style={styles.text}>{timeFormat(this.props.time,'0', 2)}</Text>
-        </Animated.View>
-        <Animated.View style={{
-          opacity: this.state.positionValue
-          
-        }}>
-          <Text style={styles.text}>{timeFormat(this.props.time,'0', 2)}</Text>
-        </Animated.View>
-      </View>
+      <Animated.View style={{
+        backgroundColor: "#fa983a",
+        width: 80,
+        height: 80,
+        borderRadius: 10,
+        justifyContent: 'center',
+      }}>
+        <Text style={styles.text}>{timeFormat(this.props.time,'0', 2)}</Text>
+      </Animated.View>
     )
   }
 }
@@ -55,9 +47,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   text: {
-    fontWeight: 'bold', 
+    fontFamily: 'Digital7',
     fontSize: 50, 
     textAlign: "center", 
-    color: "white"
+    color: "white",
   }
 })

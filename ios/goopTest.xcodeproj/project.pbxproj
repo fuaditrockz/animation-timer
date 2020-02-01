@@ -16,6 +16,16 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* goopTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* goopTestTests.m */; };
+		BD9C0CB84E1A46AA9BC5B77D /* Digital7-1e1Z.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F6F88C6C1F64BA0A144C8E3 /* Digital7-1e1Z.ttf */; };
+		2DE56C5097AB4BC5B91CEED8 /* Digital7Italic-RBM3.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7539A2C5504048FFA18B7CC8 /* Digital7Italic-RBM3.ttf */; };
+		47A73269FBA7467AB940A71C /* Digital7Mono-B1g5.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0898F82FC0040638D4B88ED /* Digital7Mono-B1g5.ttf */; };
+		76FE85BFF60B4E758A8F6D2B /* Digital7Monoitalic-8xKz.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C1588AEF4E6496A86585049 /* Digital7Monoitalic-8xKz.ttf */; };
+		30ADB75A74264A97B815995F /* Digital71e1Z.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E85E157775B941EFA4DD9D9F /* Digital71e1Z.ttf */; };
+		4DE2EFE396A1479EB8C2ED1C /* Digital71e1Z.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 124BD0698A5C49E69A4D52F7 /* Digital71e1Z.ttf */; };
+		6D31190702FD4F9493BA8006 /* Digital7Italic-RBM3.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58CB80A383AE401E854822FD /* Digital7Italic-RBM3.ttf */; };
+		7B53BFE6DDF14A10B48A6A3C /* Digital7Mono-B1g5.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0437C049258342FD9E857B3C /* Digital7Mono-B1g5.ttf */; };
+		76071E9C3BD0490DA6B6C69A /* Digital7Monoitalic-8xKz.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 94E3C7CCB6704E718FD3174F /* Digital7Monoitalic-8xKz.ttf */; };
+		8F90BA653E3B4C359146588D /* Digital7.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B87CDC5519634DCABAEF092A /* Digital7.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +61,16 @@
 		2D02E4901E0B4A5D006451C7 /* goopTest-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "goopTest-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		4F6F88C6C1F64BA0A144C8E3 /* Digital7-1e1Z.ttf */ = {isa = PBXFileReference; name = "Digital7-1e1Z.ttf"; path = "../assets/fonts/Digital7-1e1Z.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7539A2C5504048FFA18B7CC8 /* Digital7Italic-RBM3.ttf */ = {isa = PBXFileReference; name = "Digital7Italic-RBM3.ttf"; path = "../assets/fonts/Digital7Italic-RBM3.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D0898F82FC0040638D4B88ED /* Digital7Mono-B1g5.ttf */ = {isa = PBXFileReference; name = "Digital7Mono-B1g5.ttf"; path = "../assets/fonts/Digital7Mono-B1g5.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3C1588AEF4E6496A86585049 /* Digital7Monoitalic-8xKz.ttf */ = {isa = PBXFileReference; name = "Digital7Monoitalic-8xKz.ttf"; path = "../assets/fonts/Digital7Monoitalic-8xKz.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E85E157775B941EFA4DD9D9F /* Digital71e1Z.ttf */ = {isa = PBXFileReference; name = "Digital71e1Z.ttf"; path = "../assets/fonts/Digital71e1Z.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		124BD0698A5C49E69A4D52F7 /* Digital71e1Z.ttf */ = {isa = PBXFileReference; name = "Digital71e1Z.ttf"; path = "../src/assets/fonts/Digital71e1Z.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		58CB80A383AE401E854822FD /* Digital7Italic-RBM3.ttf */ = {isa = PBXFileReference; name = "Digital7Italic-RBM3.ttf"; path = "../src/assets/fonts/Digital7Italic-RBM3.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0437C049258342FD9E857B3C /* Digital7Mono-B1g5.ttf */ = {isa = PBXFileReference; name = "Digital7Mono-B1g5.ttf"; path = "../src/assets/fonts/Digital7Mono-B1g5.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		94E3C7CCB6704E718FD3174F /* Digital7Monoitalic-8xKz.ttf */ = {isa = PBXFileReference; name = "Digital7Monoitalic-8xKz.ttf"; path = "../src/assets/fonts/Digital7Monoitalic-8xKz.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B87CDC5519634DCABAEF092A /* Digital7.ttf */ = {isa = PBXFileReference; name = "Digital7.ttf"; path = "../src/assets/fonts/Digital7.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +160,7 @@
 				00E356EF1AD99517003FC87E /* goopTestTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				7707C5FC3143432C98E91065 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -156,6 +177,24 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		7707C5FC3143432C98E91065 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				4F6F88C6C1F64BA0A144C8E3 /* Digital7-1e1Z.ttf */,
+				7539A2C5504048FFA18B7CC8 /* Digital7Italic-RBM3.ttf */,
+				D0898F82FC0040638D4B88ED /* Digital7Mono-B1g5.ttf */,
+				3C1588AEF4E6496A86585049 /* Digital7Monoitalic-8xKz.ttf */,
+				E85E157775B941EFA4DD9D9F /* Digital71e1Z.ttf */,
+				124BD0698A5C49E69A4D52F7 /* Digital71e1Z.ttf */,
+				58CB80A383AE401E854822FD /* Digital7Italic-RBM3.ttf */,
+				0437C049258342FD9E857B3C /* Digital7Mono-B1g5.ttf */,
+				94E3C7CCB6704E718FD3174F /* Digital7Monoitalic-8xKz.ttf */,
+				B87CDC5519634DCABAEF092A /* Digital7.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -240,7 +279,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 940;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -293,6 +332,16 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				BD9C0CB84E1A46AA9BC5B77D /* Digital7-1e1Z.ttf in Resources */,
+				2DE56C5097AB4BC5B91CEED8 /* Digital7Italic-RBM3.ttf in Resources */,
+				47A73269FBA7467AB940A71C /* Digital7Mono-B1g5.ttf in Resources */,
+				76FE85BFF60B4E758A8F6D2B /* Digital7Monoitalic-8xKz.ttf in Resources */,
+				30ADB75A74264A97B815995F /* Digital71e1Z.ttf in Resources */,
+				4DE2EFE396A1479EB8C2ED1C /* Digital71e1Z.ttf in Resources */,
+				6D31190702FD4F9493BA8006 /* Digital7Italic-RBM3.ttf in Resources */,
+				7B53BFE6DDF14A10B48A6A3C /* Digital7Mono-B1g5.ttf in Resources */,
+				76071E9C3BD0490DA6B6C69A /* Digital7Monoitalic-8xKz.ttf in Resources */,
+				8F90BA653E3B4C359146588D /* Digital7.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

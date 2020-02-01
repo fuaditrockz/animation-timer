@@ -2,7 +2,7 @@ import React from 'react';
 import {
   StatusBar,
 } from 'react-native';
-import Countdown from './components/Countdown';
+import Countdown from './src/components/Countdown';
 
 const App: () => React$Node = () => {
   return (
