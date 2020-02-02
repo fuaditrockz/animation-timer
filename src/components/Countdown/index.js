@@ -15,11 +15,11 @@ export default class Countdown extends Component {
       time: {},
       buttonStatus: false,
       opacityValueSecond: new Animated.Value(1),
-      /* opacityValueMinute: new Animated.Value(1) */
+      opacityValueMinute: new Animated.Value(1)
     }
     this.handleStartStop = this.handleStartStop.bind(this);
     this.slideUpSecond = new Animated.ValueXY({ x: 0, y: 0 });
-    /* this.slideUpMinute = new Animated.ValueXY({ x: 0, y: 0 }); */
+    this.slideUpMinute = new Animated.ValueXY({ x: 0, y: 0 });
   }
 
   _secondAnimation = () => {
@@ -33,7 +33,7 @@ export default class Countdown extends Component {
     }).start();
   }
 
-  /* _minuteAnimation = () => {
+  _minuteAnimation = () => {
     Animated.timing(this.state.opacityValueMinute, {
       toValue: 0,
     }).start();
@@ -42,7 +42,7 @@ export default class Countdown extends Component {
       toValue: {x: 0, y: -40},
       duration: 1000,
     }).start();
-  } */
+  }
 
   setupTime() {
     const remainingSecond = this.props.remainingSecond;
@@ -73,10 +73,12 @@ export default class Countdown extends Component {
     this.timer = setInterval(() => this.setState(prevState => {
       this.slideUpSecond = new Animated.ValueXY({ x: 0, y: 0 })
       this.state.opacityValueSecond = new Animated.Value(1)
+      this.slideUpMinute = new Animated.ValueXY({ x: 0, y: 0 });
+      this.state.opacityValueMinute = new Animated.Value(1)
 
       if (prevState.time.seconds <= 1 && prevState.time.minutes >= 1) {
-        /* this._minuteAnimation();
-        this._secondAnimation(); */
+        this._minuteAnimation();
+        this._secondAnimation();
         return {
           time: {
             seconds: 60,
@@ -141,13 +143,13 @@ export default class Countdown extends Component {
               <View>
                 <TimeBlock 
                   position="absolute"
-                  time={this.state.time.minutes <= 0 ? 0 : this.state.time.minutes - 1}
+                  time={this.state.time.minutes}
                 />
                 <Animated.View
                   useNativeDriver={true}
-                  /* style={[{
+                  style={[{
                     opacity: this.state.opacityValueMinute
-                  }, this.slideUpMinute.getLayout()]} */
+                  }, this.slideUpMinute.getLayout()]}
                 >
                   <TimeBlock time={this.state.time.minutes} />
                 </Animated.View>
