@@ -5,7 +5,6 @@ import {
   StyleSheet,
   Alert, View, TouchableOpacity, Image, Animated
 } from 'react-native';
-import TimerBlock from './TimerBlock';
 import TimeBlock from './widgets/TimeBlock';
 
 export default class Countdown extends Component {
@@ -19,8 +18,8 @@ export default class Countdown extends Component {
       opacityValueMinute: new Animated.Value(1)
     }
     this.handleStartStop = this.handleStartStop.bind(this);
-    this.slideUpSecond = new Animated.ValueXY({ x: 0, y: 0 })
-    this.slideUpMinute = new Animated.ValueXY({ x: 0, y: 0 })
+    this.slideUpSecond = new Animated.ValueXY({ x: 0, y: 0 });
+    this.slideUpMinute = new Animated.ValueXY({ x: 0, y: 0 });
   }
 
   _secondAnimation = () => {
